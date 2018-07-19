@@ -1,8 +1,8 @@
 JAVAC = javac
-SOURCE_DIR = lox
-TOOL_DIR = $(SOURCE_DIR)/tool
+SOURCE_DIR = com/craftinginterpreters/lox
+TOOL_DIR = com/craftinginterpreters/tool
 
-all: lox tool
+all: lox tool | $(BUILD_TREE)
 
 # .PHONY: lox
 lox: $(SOURCE_DIR)/*.class
