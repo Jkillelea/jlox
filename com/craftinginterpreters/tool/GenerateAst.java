@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GenerateAst {
+    // final static String TAB = "\t";   // actual tab character
+    // final static String TAB = "  "; // 2 spaces
     final static String TAB = "    "; // 4 spaces
 
     public static void main(String[] args) throws IOException {
@@ -75,7 +77,6 @@ public class GenerateAst {
                                     String baseName, 
                                     String className, 
                                     String fieldList) {
-                                        
         // begin class
         writer.println();
         writer.println(indent() + "static class " + className + " extends " + baseName + " {");
@@ -118,8 +119,4 @@ public class GenerateAst {
         text = TAB + text;
         return text;
     }
-
-    // private static String indent(String text) {
-    //     return indent(text, 1);
-    // }
 }
