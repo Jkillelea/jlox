@@ -39,7 +39,11 @@ public class Lox {
 
         while (true) {
             System.out.print("> ");
-            run(reader.readLine());
+            try {
+                run(reader.readLine());
+            } catch (NullPointerException e) { // ctrl+D sends EOF
+                run("");
+            } 
             hadError = false;
         }
     }
@@ -53,6 +57,14 @@ public class Lox {
         }
     }
 
+    // show an error to the user when a bad token is encountered
+    static void error(Token token, String message) {
+        if (token.type == TokenType.EOF)
+            report(token.line, " at end", message);
+        else
+            report(token.line, " at '" + token.lexeme + "'", message);
+    }
+
     static void error(int line, String message) {
         report(line, "", message);
     }
@@ -60,13 +72,5 @@ public class Lox {
     private static void report(int line, String where, String message) {
         System.err.println("[line " + line + "] Error" + where + ": " + message);
         hadError = true;
-    }
-
-    // show an error to the user when a bad token is encountered
-    static void error(Token token, String message) {
-        if (token.type == TokenType.EOF)
-            report(token.line, " at end", message);
-        else
-            report(token.line, " at '" + token.lexeme + "'", message);
     }
 }
