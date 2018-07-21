@@ -42,7 +42,7 @@ public class Lox {
             try {
                 run(reader.readLine());
             } catch (NullPointerException e) { // ctrl+D sends EOF
-                run("");
+                return;
             } 
             hadError = false;
         }
