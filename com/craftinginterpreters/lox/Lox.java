@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import com.craftinginterpreters.lox.*;
+import com.craftinginterpreters.lox.Scanner;
 
 public class Lox {
     static final Interpreter interpreter = new Interpreter();
@@ -59,12 +60,12 @@ public class Lox {
         List<Token> tokens = scanner.scanTokens();
 
         Parser parser = new Parser(tokens);
-        Expr expression = parser.parse();
+        List<Stmt> statements = parser.parse();
         
         if (hadError)
             return;
 
-        interpreter.interpret(expression);
+        interpreter.interpret(statements);
         // System.out.println(new AstPrinter().print(expression));
     }
 

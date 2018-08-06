@@ -2,19 +2,26 @@ JAVAC = javac
 SOURCE_DIR = com/craftinginterpreters/lox
 TOOL_DIR = com/craftinginterpreters/tool
 
-all: lox tool | $(BUILD_TREE)
+all:
+	$(MAKE) tool
+	$(MAKE) file_generation
+	$(MAKE) lox
 
-# .PHONY: lox
+.PHONY: lox
 lox: $(SOURCE_DIR)/*.class
 
 $(SOURCE_DIR)/%.class: $(SOURCE_DIR)/%.java
 	$(JAVAC) $^
 
-# .PHONY: tool
+.PHONY: tool
 tool: $(TOOL_DIR)/*.class
 
 $(TOOL_DIR)/%.class: $(TOOL_DIR)/%.java
 	$(JAVAC) $^
+
+.PHONY: expr_generation
+file_generation: tool
+	java com.craftinginterpreters.tool.GenerateAst $(SOURCE_DIR)
 
 .PHONY: clean
 clean:
