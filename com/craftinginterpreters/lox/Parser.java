@@ -79,7 +79,7 @@ class Parser {
         List<Stmt> statements = new ArrayList<>();
         
         while (!check(RIGHT_BRACE) && !isAtEnd()) {
-            statments.add(declaration());
+            statements.add(declaration());
         }
 
         consume(RIGHT_BRACE, "Expect '}' after block");
